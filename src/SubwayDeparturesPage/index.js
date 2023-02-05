@@ -21,7 +21,7 @@ const getNearbyComplexes = ({complexes, latitude, longitude}) => {
   const complexesArr = Object.values(complexes);
   const sortedComplexes = complexesArr.sort(compareComplexes);
 
-  return sortedComplexes.slice(0, 5);
+  return sortedComplexes.slice(0, 15);
 }
 
 class SubwayDeparturesPage extends Component {
