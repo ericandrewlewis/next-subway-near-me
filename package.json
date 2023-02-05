@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "proxy": "http://localhost:8080",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
