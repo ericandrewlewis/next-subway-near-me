@@ -28,7 +28,8 @@ class SubwayDeparturesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      responses: []
+      responses: [],
+      errorMessage: '',
     }
     this.fetchDepartures = this.fetchDepartures.bind(this);
   }
@@ -43,14 +44,26 @@ class SubwayDeparturesPage extends Component {
     const nearbyComplexes = getNearbyComplexes({complexes, latitude, longitude });
     let url = '/api/departures.json?' + nearbyComplexes.map(complex => `complexIds[]=${complex.id}`).join('&');
     const response = await fetch(url);
-    const responses = await response.json();
-    this.setState({
-      responses
-    });
+    const responseJson = await response.json();
+    if (responseJson.status === 'ok') {
+      this.setState({
+        responses: responseJson.data.departuresResponse,
+      });
+    }
+    if (responseJson.status === 'error') {
+      this.setState({
+        errorMessage: responseJson.errorMessage,
+      });
+    }
   }
   
   render() {
     const { latitude, longitude } = this.props;
+    if (this.state.errorMessage) {
+      return (
+        <div>{this.state.errorMessage}</div>
+      );
+    }
     return (
       <div>
         {this.state.responses.map(response => {

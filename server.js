@@ -17,8 +17,25 @@ const PORT = process.env.PORT || 8080;
 
 app.get('/api/departures.json', async (request, response) => {
   const complexIds = request.query.complexIds;
-  const departuresResponse = await client.departures(complexIds);
-  response.json(departuresResponse);
+  let departuresResponse;
+  try {
+    departuresResponse = await client.departures(complexIds);
+  } catch (e) {
+    response.status(500);
+    response.json({
+      status: 'error',
+      errorMessage: e.toString(),
+    });
+    process.stderr.write("Error calling mta-realtime-subway-departures:\n");
+    process.stderr.write(`${e.toString()}\n`);
+    return;
+  }
+  response.json({
+    status: 'ok',
+    data: {
+      departuresResponse
+    },
+  });
 });
 
 // In production, any request that doesn't match a previous route

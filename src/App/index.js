@@ -50,7 +50,6 @@ class App extends Component {
     return (
       <div className="app">
         <Geolocation
-          onSuccess={console.log}
           maximumAge={120}
           render={({
             fetchingPosition,
@@ -68,9 +67,9 @@ class App extends Component {
                 <div>
                   <h2 className="loading-message">Determining your location...</h2>
                   <h2 className="loading-message">
-                    <span class="globe globe-1" aria-hidden="true">🌍</span>
-                    <span class="globe globe-2" aria-hidden="true">🌎</span>
-                    <span class="globe globe-3" aria-hidden="true">🌏</span>
+                    <span className="globe globe-1" aria-hidden="true">🌍</span>
+                    <span className="globe globe-2" aria-hidden="true">🌎</span>
+                    <span className="globe globe-3" aria-hidden="true">🌏</span>
                   </h2>
                 </div>
               }

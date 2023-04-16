@@ -17,6 +17,7 @@ class Line extends Component {
             <h3 className="northbound-heading">{northboundTitle}</h3>
             {departures.N.slice(0, 5).map(departure => {
               return <Departure
+                key={departure.time}
                 time={departure.time}
                 routeId={departure.routeId}
               />;
@@ -26,6 +27,7 @@ class Line extends Component {
             <h3 className="southbound-heading">{southboundTitle}</h3>
             {departures.S.slice(0, 5).map(departure => {
               return <Departure
+                key={departure.time}
                 time={departure.time}
                 routeId={departure.routeId}
               />;
