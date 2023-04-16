@@ -15,11 +15,10 @@ const client = createClient(process.env.MTA_API_KEY);
 // and fallback to 8080
 const PORT = process.env.PORT || 8080;
 
-app.get('/api/departures.json', (request, response) => {
+app.get('/api/departures.json', async (request, response) => {
   const complexIds = request.query.complexIds;
-  client.departures(complexIds).then(departuresResponse => {
-    response.json(departuresResponse);
-  });
+  const departuresResponse = await client.departures(complexIds);
+  response.json(departuresResponse);
 });
 
 // In production, any request that doesn't match a previous route

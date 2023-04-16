@@ -8,14 +8,13 @@ const minutesFromNow = (unix) => {
 
 class Departure extends Component {
   render() {
-    const { time, routeId, destination } = this.props;
+    const { time, routeId } = this.props;
 
     const displayedTime = minutesFromNow(time);
     return (
       <div className="departure">
         <div className={`route-icon route-${routeId}`}>{routeId}</div> 
         <div className="time">{displayedTime} min</div>
-        {/* <div className="destination">{destination}</div> */}
       </div>
     );
   }
